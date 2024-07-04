@@ -6,8 +6,19 @@ type genRules = {
   numbers?: boolean;
   symbols?: boolean;
   length: number;
+  comment?: string;
 };
-type value = { generatePassword(arg: genRules): string };
+
+type password = {
+  value: string;
+  comment?: string;
+  date: Date;
+};
+
+type value = {
+  generatePassword(arg: genRules): password;
+  addPassword(arg: password): void;
+};
 
 const appContext = React.createContext<value>({} as value);
 
@@ -16,7 +27,7 @@ export function useAppContext() {
 }
 
 export function AppContextProvider({ children }: { children: ReactNode }) {
-  let passwords: string[] = [];
+  let passwords: password[] = [];
 
   const generatePassword = ({
     smallLetters = false,
@@ -24,14 +35,15 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     numbers = false,
     symbols = false,
     length,
-  }: genRules): string => {
+    comment = "Not set",
+  }: genRules): password => {
     let sm = "qwertyuiopasdfghjklzxcvbnm";
     let lg = "QWERTYUIOPASDFGHJKLZXCVBNM";
     let nb = "1234567890";
     let symb = "!@#$%^&*";
 
     let generateFromString = "";
-    let result = "";
+    let result: password = { value: "", comment, date: new Date() };
 
     largeLetters && (generateFromString += lg);
     numbers && (generateFromString += nb);
@@ -40,7 +52,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
       (generateFromString.length === 0 && (generateFromString += sm));
 
     for (let i = 0; i < length; i++) {
-      result +=
+      result.value +=
         generateFromString[
           Math.floor(Math.random() * generateFromString.length)
         ];
@@ -49,6 +61,10 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     return result;
   };
 
-  let values: value = { generatePassword };
+  const addPassword = (password: password) => {
+    passwords.push(password);
+  };
+
+  let values: value = { generatePassword, addPassword };
   return <appContext.Provider value={values}>{children}</appContext.Provider>;
 }
