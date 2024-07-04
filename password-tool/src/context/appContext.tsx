@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import useLocaleStorage from "../hooks/useLocaleStorage";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 type genRules = {
   smallLetters?: boolean;
@@ -30,7 +30,7 @@ export function useAppContext() {
 }
 
 export function AppContextProvider({ children }: { children: ReactNode }) {
-  let [passwords, setPasswords] = React.useState<password[]>([]);
+  let [passwords, setPasswords] = useLocalStorage<password[]>("passwords", []);
 
   const generatePassword = ({
     smallLetters = false,
@@ -65,7 +65,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
   };
 
   const addPassword = (password: password) => {
-    setPasswords((prev) => ({ ...prev, password }));
+    setPasswords((prev) => [...prev, password]);
   };
 
   const removePassword = (value: string) => {
