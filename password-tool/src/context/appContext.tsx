@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import useLocaleStorage from "../hooks/useLocaleStorage";
 
 type genRules = {
   smallLetters?: boolean;
