@@ -16,8 +16,10 @@ type password = {
 };
 
 type value = {
+  passwords: password[];
   generatePassword(arg: genRules): password;
   addPassword(arg: password): void;
+  removePassword(arg: string): void;
 };
 
 const appContext = React.createContext<value>({} as value);
@@ -27,7 +29,7 @@ export function useAppContext() {
 }
 
 export function AppContextProvider({ children }: { children: ReactNode }) {
-  let passwords: password[] = [];
+  let [passwords, setPasswords] = React.useState<password[]>([]);
 
   const generatePassword = ({
     smallLetters = false,
@@ -62,9 +64,18 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
   };
 
   const addPassword = (password: password) => {
-    passwords.push(password);
+    setPasswords((prev) => ({ ...prev, password }));
   };
 
-  let values: value = { generatePassword, addPassword };
+  const removePassword = (value: string) => {
+    setPasswords(passwords.filter((el) => el.value !== value));
+  };
+
+  let values: value = {
+    generatePassword,
+    addPassword,
+    passwords,
+    removePassword,
+  };
   return <appContext.Provider value={values}>{children}</appContext.Provider>;
 }
