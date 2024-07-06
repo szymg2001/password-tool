@@ -1,4 +1,15 @@
 {
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "esnext"],
+    "module": "esnext",
+    "jsx": "react",
+    "esModuleInterop": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
   "files": [],
   "references": [
     {
