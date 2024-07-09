@@ -1,0 +1,42 @@
+import React, { act } from "react";
+import { AppContextProvider, useAppContext } from "./appContext";
+import { renderHook } from "@testing-library/react";
+
+describe("appContext", () => {
+  it("Should generate new password correctly", () => {
+    const wrapper: React.FC = ({ children }: any) => (
+      <AppContextProvider>{children}</AppContextProvider>
+    );
+
+    const { result } = renderHook(() => useAppContext(), { wrapper });
+    const newPassword = result.current.generatePassword({
+      length: 12,
+    });
+
+    expect(newPassword.value).toHaveLength(12);
+    expect(newPassword.date).toBeDefined();
+  });
+
+  it("Should add and remove passwords from context array", () => {
+    const wrapper: React.FC = ({ children }: any) => (
+      <AppContextProvider>{children}</AppContextProvider>
+    );
+    const { result } = renderHook(() => useAppContext(), { wrapper });
+
+    //Generate new password
+    let newPassword = result.current.generatePassword({ length: 12 });
+
+    //Add password
+    act(() => {
+      result.current.addPassword(newPassword);
+    });
+
+    expect(result.current.passwords).toHaveLength(1);
+
+    //Remove password
+    act(() => {
+      result.current.removePassword(newPassword.value);
+    });
+    expect(result.current.passwords).toHaveLength(0);
+  });
+});

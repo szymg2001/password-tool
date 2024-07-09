@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
-type genRules = {
+export type genRules = {
   smallLetters?: boolean;
   largeLetters?: boolean;
   numbers?: boolean;
@@ -10,7 +10,7 @@ type genRules = {
   comment?: string;
 };
 
-type password = {
+export type password = {
   value: string;
   comment?: string;
   date: Date;
@@ -51,8 +51,8 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     largeLetters && (generateFromString += lg);
     numbers && (generateFromString += nb);
     symbols && (generateFromString += symb);
-    smallLetters ||
-      (generateFromString.length === 0 && (generateFromString += sm));
+    if (smallLetters || generateFromString.length === 0)
+      generateFromString += sm;
 
     for (let i = 0; i < length; i++) {
       result.value +=
