@@ -7,7 +7,7 @@ export default function GeneratePassword() {
   let [rules, setRules] = React.useState<genRules>({
     length: 12,
   });
-  let { generatePassword } = useAppContext();
+  let { generatePassword, addPassword } = useAppContext();
 
   const updateRule = (ruleName: keyof genRules, value: boolean) => {
     setRules((prev) => ({ ...prev, [ruleName]: value }));
@@ -19,6 +19,12 @@ export default function GeneratePassword() {
       <p className="generate-password__result">
         {password ? password.value : "Your password will be here"}
       </p>
+      <button
+        disabled={password === null}
+        onClick={() => addPassword(password!)}
+      >
+        Add password
+      </button>
       <button onClick={() => setPassword(generatePassword(rules))}>
         Generate
       </button>
