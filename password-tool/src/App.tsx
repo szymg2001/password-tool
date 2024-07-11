@@ -3,6 +3,7 @@ import GeneratePassword from "./components/GeneratePassword";
 import Navbar from "./components/Navbar";
 import PasswordsList from "./components/PasswordsList";
 import PracticePassword from "./components/PracticePassword";
+import "./css/app.css";
 
 function App() {
   return (
