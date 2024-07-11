@@ -9,9 +9,11 @@ export default function PracticePassword() {
   let [length, setLength] = React.useState(passwords[selected].value.length);
   let [mistakes, setMistakes] = React.useState<number[]>([]);
   let [showComparison, setShowComparison] = React.useState(false);
+  let blockKeyDownRef = React.useRef(false);
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key.length > 1) return;
+    if (blockKeyDownRef.current) return;
     setInput((prev) => prev + e.key);
     setShowComparison(false);
     setInputToCompare("");
@@ -19,6 +21,7 @@ export default function PracticePassword() {
 
   const comparePasswords = () => {
     setMistakes([]);
+    blockKeyDownRef.current = true;
     input.split("").forEach((el, index) => {
       if (el !== passwords[selected].value[index]) {
         setMistakes((prev) => [...prev, index]);
@@ -27,6 +30,9 @@ export default function PracticePassword() {
     setInputToCompare(input);
     setShowComparison(true);
     setInput("");
+    setTimeout(() => {
+      blockKeyDownRef.current = false;
+    }, 500);
   };
 
   React.useEffect(() => {
@@ -36,6 +42,7 @@ export default function PracticePassword() {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
   React.useEffect(() => {
     if (input.length === length) comparePasswords();
   }, [input]);

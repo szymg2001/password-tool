@@ -7,12 +7,12 @@ export type genRules = {
   numbers?: boolean;
   symbols?: boolean;
   length: number;
-  comment?: string;
+  comment: string;
 };
 
 export type password = {
   value: string;
-  comment?: string;
+  comment: string;
   date: Date;
 };
 

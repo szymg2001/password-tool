@@ -10,6 +10,7 @@ describe("appContext", () => {
     const { result } = renderHook(() => useAppContext(), { wrapper });
     const newPassword = result.current.generatePassword({
       length: 12,
+      comment: "Not set",
     });
 
     expect(newPassword.value).toHaveLength(12);
@@ -20,7 +21,10 @@ describe("appContext", () => {
     const { result } = renderHook(() => useAppContext(), { wrapper });
 
     //Generate new password
-    let newPassword = result.current.generatePassword({ length: 12 });
+    let newPassword = result.current.generatePassword({
+      length: 12,
+      comment: "Not set",
+    });
 
     //Add password
     act(() => {
@@ -39,7 +43,10 @@ describe("appContext", () => {
   it("Should select password correctly", () => {
     const { result } = renderHook(() => useAppContext(), { wrapper });
 
-    let newPassword = result.current.generatePassword({ length: 12 });
+    let newPassword = result.current.generatePassword({
+      length: 12,
+      comment: "Not set",
+    });
     act(() => {
       result.current.addPassword(newPassword);
     });

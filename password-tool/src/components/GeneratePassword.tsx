@@ -6,11 +6,17 @@ export default function GeneratePassword() {
   let [password, setPassword] = React.useState<password | null>(null);
   let [rules, setRules] = React.useState<genRules>({
     length: 12,
+    comment: "Not set",
   });
   let { generatePassword, addPassword } = useAppContext();
 
   const updateRule = (ruleName: keyof genRules, value: boolean) => {
     setRules((prev) => ({ ...prev, [ruleName]: value }));
+  };
+
+  const updateComment = (value: string) => {
+    setRules((prev) => ({ ...prev, comment: value }));
+    setPassword((prev) => (prev ? { ...prev, comment: value } : null));
   };
 
   return (
@@ -36,7 +42,10 @@ export default function GeneratePassword() {
             min={1}
             max={32}
             onChange={(e) =>
-              setRules((prev) => ({ ...prev, length: e.target.value }))
+              setRules((prev) => ({
+                ...prev,
+                length: parseInt(e.target.value),
+              }))
             }
           />
         </label>
@@ -44,6 +53,10 @@ export default function GeneratePassword() {
         <RuleInput label="Large letters" onCheck={updateRule} />
         <RuleInput label="Number" onCheck={updateRule} />
         <RuleInput label="Symbols" onCheck={updateRule} />
+        <label>
+          Comment:
+          <input type="text" onChange={(e) => updateComment(e.target.value)} />
+        </label>
       </div>
     </div>
   );
