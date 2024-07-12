@@ -1,0 +1,19 @@
+.password-practice__container {
+  margin-top: 100px;
+}
+
+.password-practice__letters {
+  display: flex;
+  list-style-type: none;
+}
+
+.password-pracitce__letter {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin-left: 10px;
+  font-size: 20px;
+}

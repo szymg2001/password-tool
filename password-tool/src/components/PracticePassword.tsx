@@ -1,6 +1,7 @@
 import React from "react";
 import { useAppContext } from "../context/appContext";
 import PasswordCompare from "./PasswordCompare";
+import "../css/practice.css";
 
 export default function PracticePassword() {
   let { selected, passwords } = useAppContext();
@@ -49,9 +50,11 @@ export default function PracticePassword() {
 
   return (
     <div className="password-practice__container">
-      <ul>
-        {input.split("").map((letter) => (
-          <li>{letter}</li>
+      <ul className="password-practice__letters">
+        {[...Array(length).keys()].map((el, index) => (
+          <li className="password-pracitce__letter">
+            {input.length > index && input.split("")[index]}
+          </li>
         ))}
       </ul>
       {showComparison && (
