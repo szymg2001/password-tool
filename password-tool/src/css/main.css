@@ -6,8 +6,32 @@
   margin: 0;
 }
 
+:root {
+  --letter-background: rgba(255, 255, 255, 0.2);
+  --correct-background: rgba(29, 209, 29, 0.2);
+  --wrong-background: rgba(255, 0, 0, 0.2);
+  --button-bgColor: rgb(97, 5, 97);
+  --button-color: white;
+}
+
 body {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: #fff;
+}
+
+.default-button {
+  all: unset;
+  background-color: var(--button-bgColor);
+  color: var(--button-color);
+  padding: 3px 5px;
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+  transition: 0.2s;
+  cursor: pointer;
+  text-align: center;
+}
+
+.default-button:hover {
+  background-color: purple;
 }
