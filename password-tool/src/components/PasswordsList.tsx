@@ -1,7 +1,15 @@
 import { useAppContext } from "../context/appContext";
+import "../css/list.css";
 
 export default function PasswordsList() {
-  let { passwords, selectPassword } = useAppContext();
+  let { passwords, selectPassword, removePassword } = useAppContext();
+
+  const handleRemove = (value: string) => {
+    let confirmValue = confirm("Are you sure?");
+    if (confirmValue === true) {
+      removePassword(value);
+    } else return;
+  };
 
   return (
     <div className="passwords-list__container">
@@ -11,7 +19,13 @@ export default function PasswordsList() {
           <li
             className="passwords-list__element"
             onClick={() => selectPassword(index)}
-          >{`${password.value} - ${password.comment}`}</li>
+          >
+            <div>
+              <span className="passwords-list__element__value">{`${password.value} - `}</span>
+              <span className="passwords-list__element__comment">{`${password.comment}`}</span>
+            </div>
+            <button onClick={() => handleRemove(password.value)}>Remove</button>
+          </li>
         ))}
       </ul>
     </div>

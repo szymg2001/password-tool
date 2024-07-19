@@ -9,7 +9,7 @@
 }
 
 .navbar__link {
-  color: cyan;
+  color: var(--blueColor);
   font-size: 20px;
   text-decoration: none;
   transition: 0.25s;
@@ -19,5 +19,5 @@
   margin-left: 20px;
 }
 .navbar__link:hover {
-  color: skyblue;
+  color: var(--lightBlueColor);
 }
