@@ -1,3 +1,5 @@
+import React from "react";
+
 interface PasswordComparePropsI {
   indexes: number[];
   input: string;
@@ -10,7 +12,7 @@ interface PasswordCompareSingleI {
   show: boolean;
 }
 
-function PasswordCompareSingle({
+export function PasswordCompareSingle({
   indexes,
   value,
   show,
