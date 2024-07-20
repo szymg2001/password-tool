@@ -24,6 +24,7 @@ export function PasswordCompareSingle({
           className={`password-compare__letter --is${
             indexes.includes(index) ? "Wrong" : "Correct"
           }`}
+          key={index}
         >
           {show ? el : "*"}
         </span>

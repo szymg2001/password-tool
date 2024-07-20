@@ -1,3 +1,4 @@
+import React from "react";
 import { useAppContext } from "../context/appContext";
 import "../css/list.css";
 
@@ -19,6 +20,7 @@ export default function PasswordsList() {
           <li
             className="passwords-list__element"
             onClick={() => selectPassword(index)}
+            key={index}
           >
             <div>
               <span className="passwords-list__element__value">{`${password.value} - `}</span>
