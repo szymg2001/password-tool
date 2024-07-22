@@ -5,7 +5,8 @@ import "../css/list.css";
 export default function PasswordsList() {
   let { passwords, selectPassword, removePassword } = useAppContext();
 
-  const handleRemove = (value: string) => {
+  const handleRemove = (e: React.MouseEvent, value: string) => {
+    e.stopPropagation();
     let confirmValue = confirm("Are you sure?");
     if (confirmValue === true) {
       removePassword(value);
@@ -26,7 +27,12 @@ export default function PasswordsList() {
               <span className="passwords-list__element__value">{`${password.value} - `}</span>
               <span className="passwords-list__element__comment">{`${password.comment}`}</span>
             </div>
-            <button onClick={() => handleRemove(password.value)}>Remove</button>
+            <button
+              className="passwords-list__element__remove-button"
+              onClick={(e) => handleRemove(e, password.value)}
+            >
+              Remove
+            </button>
           </li>
         ))}
       </ul>
