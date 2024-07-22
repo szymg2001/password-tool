@@ -1,0 +1,35 @@
+.generate-password__container {
+  margin-top: 40px;
+}
+
+.generate-password__result {
+  background-color: var(--letter-background);
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0px;
+  font-size: 20px;
+  letter-spacing: 1.5px;
+}
+
+.generate-password__buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+/*RULES*/
+
+.generate-password__rules {
+  display: flex;
+  flex-direction: column;
+}
+
+.generate-password__rules > h2 {
+  font-size: 19px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.generate-password__rule-label {
+  margin-right: 10px;
+}

@@ -23,9 +23,16 @@ export default function RuleInput({ label, onCheck }: RuleInputProps) {
   };
 
   return (
-    <label>
-      {`${label}:`}
-      <input type="checkbox" onChange={handleCheck} />
-    </label>
+    <div className="generate-password__rule-label-containter">
+      <label
+        className="generate-password__rule-label"
+        htmlFor={`generate-password__rule-input-${label.trim()}`}
+      >{`${label}:`}</label>
+      <input
+        type="checkbox"
+        onChange={handleCheck}
+        id={`generate-password__rule-input-${label.trim()}`}
+      />
+    </div>
   );
 }
