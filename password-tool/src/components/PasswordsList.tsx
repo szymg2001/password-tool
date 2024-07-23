@@ -3,12 +3,13 @@ import { useAppContext } from "../context/appContext";
 import "../css/list.css";
 
 export default function PasswordsList() {
-  let { passwords, selectPassword, removePassword } = useAppContext();
+  let { passwords, selectPassword, removePassword, clearList } =
+    useAppContext();
+  const [show, setShow] = React.useState(false);
 
   const handleRemove = (e: React.MouseEvent, value: string) => {
     e.stopPropagation();
-    let confirmValue = confirm("Are you sure?");
-    if (confirmValue === true) {
+    if (confirm("Are you sure?") === true) {
       removePassword(value);
     } else return;
   };
@@ -16,6 +17,17 @@ export default function PasswordsList() {
   return (
     <div className="passwords-list__container">
       <h2 className="passwords-list__header">Your saved passwords</h2>
+      <div className="passwords-list__options">
+        <button
+          onClick={() => setShow((prev) => !prev)}
+          className="passwords-list__option"
+        >
+          {show ? "Hide" : "Show"}
+        </button>
+        <button onClick={clearList} className="passwords-list__option">
+          Clear list
+        </button>
+      </div>
       <ul className="passwords-list__list">
         {passwords.map((password, index) => (
           <li
@@ -24,7 +36,9 @@ export default function PasswordsList() {
             key={index}
           >
             <div>
-              <span className="passwords-list__element__value">{`${password.value} - `}</span>
+              <span className="passwords-list__element__value">{`${
+                show ? password.value : "hidden"
+              } - `}</span>
               <span className="passwords-list__element__comment">{`${password.comment}`}</span>
             </div>
             <button

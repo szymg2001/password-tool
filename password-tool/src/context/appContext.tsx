@@ -23,6 +23,7 @@ type value = {
   removePassword(arg: string): void;
   selected: number;
   selectPassword(arg: number): void;
+  clearList(): void;
 };
 
 const appContext = React.createContext<value>({} as value);
@@ -79,6 +80,12 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     setSelected(index);
   };
 
+  const clearList = () => {
+    if (window.confirm("Are you sure? It will clear your entire saved list.")) {
+      setPasswords([]);
+    } else return;
+  };
+
   let values: value = {
     generatePassword,
     addPassword,
@@ -86,6 +93,7 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     removePassword,
     selected,
     selectPassword,
+    clearList,
   };
   return <appContext.Provider value={values}>{children}</appContext.Provider>;
 }

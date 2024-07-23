@@ -8,6 +8,34 @@
   margin: 20px 0;
 }
 
+/*OPTIONS*/
+.passwords-list__options {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 15px;
+}
+
+.passwords-list__option {
+  all: unset;
+  font-size: 15px;
+  color: var(--blueColor);
+  transition: 0.25s;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.passwords-list__option + .passwords-list__option {
+  margin-left: 20px;
+  color: red;
+}
+
+.passwords-list__option:hover {
+  color: var(--lightBlueColor);
+}
+.passwords-list__option + .passwords-list__option:hover {
+  color: var(--wrong-background);
+}
+
 /*LIST*/
 .passwords-list__list {
   list-style-type: none;
