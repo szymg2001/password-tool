@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-grow: 1;
 }
 
 .passwords-list__header {
@@ -40,11 +41,16 @@
 .passwords-list__list {
   list-style-type: none;
   height: 350px;
-  border-bottom: 1px solid white;
   width: 500px;
   overflow: scroll;
   overflow-x: hidden;
   padding: 0px 10px;
+}
+
+@media screen and (max-width: 550px) {
+  .passwords-list__list {
+    width: 90vw;
+  }
 }
 
 .passwords-list__list::-webkit-scrollbar {

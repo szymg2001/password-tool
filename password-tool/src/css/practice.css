@@ -57,3 +57,19 @@
 .--isWrong {
   background-color: var(--wrong-background);
 }
+
+@media screen and (max-width: 800px) {
+  .password-practice__container {
+    --gap: 6px;
+  }
+  .password-pracitce__letter {
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+  }
+
+  .password-compare__letter {
+    width: 20px;
+    height: 20px;
+  }
+}
