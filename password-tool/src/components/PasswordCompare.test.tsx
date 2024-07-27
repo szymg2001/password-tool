@@ -1,6 +1,6 @@
 import React from "react";
 import PasswordCompare from "./PasswordCompare";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 
 describe("Component - PasswordCompare", () => {
